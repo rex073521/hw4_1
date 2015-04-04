@@ -23,8 +23,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     protected void findViews(){
-        editTxtH=(TextView)findViewById(R.id.editTxtW);
-        editTxtW=(TextView)findViewById(R.id.editTxtH);
+        editTxtH=(TextView)findViewById(R.id.editTxtH);
+        editTxtW=(TextView)findViewById(R.id.editTxtW);
         btnOK=(Button)findViewById(R.id.btnOK);
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,25 +36,22 @@ public class MainActivity extends ActionBarActivity {
                 try{
                     double height=Double.parseDouble(editTxtH.getText().toString());
                     double weight=Double.parseDouble(editTxtW.getText().toString());
+                    //比對輸入的值是否為空值
                     boolean h=editTxtH.equals("");
-                    boolean w=editTxtH.equals("");
+                    boolean w=editTxtW.equals("");
+                    //若身高或體重有一個為空值則拋出例外
                     if (h || w){
-                        throw new NullPointerException();
+                        throw new Exception();
                     }
                     bundle.putDouble("height",height);
                     bundle.putDouble("weight",weight);
 
-
-
-                }catch (NullPointerException e){
+                }catch (Exception e){
                     Toast.makeText(MainActivity.this,"請輸入身高體重",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
                 intent.putExtras(bundle);
                 startActivity(intent);
-
             }
         });
     }
